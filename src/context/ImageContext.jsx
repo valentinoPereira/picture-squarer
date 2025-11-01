@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import React, { createContext, useContext, useState, useCallback } from "react";
 
 /**
  * ImageContext
@@ -21,7 +22,7 @@ export function ImageProvider({ children }) {
   // Processing options state
   const [processingOptions, setProcessingOptions] = useState({
     blurIntensity: 15,
-    paddingColor: '#ffffff',
+    paddingColor: "#ffffff",
     useBlurredBackground: false,
   });
 
@@ -55,21 +56,21 @@ export function ImageProvider({ children }) {
 
   // Processing options functions
   const setBlurIntensity = useCallback((intensity) => {
-    setProcessingOptions(prev => ({
+    setProcessingOptions((prev) => ({
       ...prev,
       blurIntensity: intensity,
     }));
   }, []);
 
   const setPaddingColor = useCallback((color) => {
-    setProcessingOptions(prev => ({
+    setProcessingOptions((prev) => ({
       ...prev,
       paddingColor: color,
     }));
   }, []);
 
   const setUseBlurredBackground = useCallback((useBlurred) => {
-    setProcessingOptions(prev => ({
+    setProcessingOptions((prev) => ({
       ...prev,
       useBlurredBackground: useBlurred,
     }));
@@ -78,7 +79,7 @@ export function ImageProvider({ children }) {
   const resetOptions = useCallback(() => {
     setProcessingOptions({
       blurIntensity: 15,
-      paddingColor: '#ffffff',
+      paddingColor: "#ffffff",
       useBlurredBackground: false,
     });
   }, []);
@@ -112,9 +113,7 @@ export function ImageProvider({ children }) {
   };
 
   return (
-    <ImageContext.Provider value={value}>
-      {children}
-    </ImageContext.Provider>
+    <ImageContext.Provider value={value}>{children}</ImageContext.Provider>
   );
 }
 
@@ -126,7 +125,7 @@ export function useImage() {
   const context = useContext(ImageContext);
 
   if (!context) {
-    throw new Error('useImage must be used within an ImageProvider');
+    throw new Error("useImage must be used within an ImageProvider");
   }
 
   return context;
