@@ -177,24 +177,8 @@ const ImagePreview = () => {
         </div>
       </div>
 
-      {/* Mobile Single Line Info */}
-      <div className="sm:hidden text-sm bg-gray-50 dark:bg-gray-800 p-3 rounded">
-        <p className="text-gray-600 dark:text-gray-400 text-center">
-          <span className="font-semibold">Original:</span>{" "}
-          <span className="font-semibold text-gray-900 dark:text-gray-100">
-            {originalImage.width} × {originalImage.height}
-          </span>
-          {" | "}
-          <span className="font-semibold">Output:</span>{" "}
-          <span className="font-semibold text-gray-900 dark:text-gray-100">
-            {Math.max(originalImage.width, originalImage.height)} ×{" "}
-            {Math.max(originalImage.width, originalImage.height)}
-          </span>
-        </p>
-      </div>
-
       {/* Current Settings Display */}
-      <div className="bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-800 rounded p-3">
+      <div className="hidden sm:block bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-800 rounded p-3">
         <p className="text-sm text-blue-900 dark:text-blue-200">
           <span className="font-semibold">Blur Intensity:</span>{" "}
           {processingOptions.blurIntensity}px
