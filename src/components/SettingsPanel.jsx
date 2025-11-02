@@ -4,8 +4,9 @@ import { useImage } from "../context/ImageContext";
 /**
  * SettingsPanel Component
  * Controls image processing settings like blur intensity, color options, etc.
+ * @param {boolean} isMobileDrawer - Whether this is rendered in a mobile drawer (affects styling)
  */
-const SettingsPanel = () => {
+const SettingsPanel = ({ isMobileDrawer = false }) => {
   const {
     originalImage,
     processingOptions,
@@ -57,9 +58,9 @@ const SettingsPanel = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className={isMobileDrawer ? "space-y-4" : "space-y-6"}>
       {/* Blur Intensity */}
-      <div className="card">
+      <div className={isMobileDrawer ? "bg-white dark:bg-gray-700 rounded-lg p-4" : "card"}>
         <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
           Blur Settings
         </h3>
@@ -153,7 +154,7 @@ const SettingsPanel = () => {
       </div>
 
       {/* Color Settings */}
-      <div className="card">
+      <div className={isMobileDrawer ? "bg-white dark:bg-gray-700 rounded-lg p-4" : "card"}>
         <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
           Padding Color
         </h3>
@@ -217,7 +218,7 @@ const SettingsPanel = () => {
       </div>
 
       {/* Reset Button */}
-      <div className="card bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+      <div className={isMobileDrawer ? "bg-gray-100 dark:bg-gray-700 rounded-lg p-4" : "card bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700"}>
         <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
           Restore all settings to defaults
         </p>
@@ -227,7 +228,7 @@ const SettingsPanel = () => {
       </div>
 
       {/* Info Panel */}
-      <div className="card bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-800">
+      <div className={isMobileDrawer ? "bg-blue-100 dark:bg-blue-900 rounded-lg p-4" : "card bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-800"}>
         <h4 className="font-semibold text-blue-900 dark:text-blue-200 mb-2">💡 Tips</h4>
         <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1">
           <li>• Blur makes the padding less distracting</li>

@@ -334,6 +334,31 @@ input:checked + .toggle-slider:before {
     transform: translateX(20px);
 }
 
+/* Mobile Settings Drawer Animations */
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInBackdrop {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.settings-drawer {
+    animation: slideUp 0.3s ease-out;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .btn-primary,
@@ -356,6 +381,17 @@ input:checked + .toggle-slider:before {
     /* Increase tap target sizes for better mobile UX */
     button:not([role="switch"]) {
         min-height: 44px;
+    }
+
+    /* Settings floating button positioning */
+    button[aria-label="Open settings"] {
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+
+    /* Ensure preview fills available space on mobile */
+    .canvas-container {
+        margin-bottom: 6rem; /* Space for floating button */
     }
 }
 
