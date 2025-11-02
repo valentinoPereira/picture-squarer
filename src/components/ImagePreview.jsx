@@ -121,7 +121,7 @@ const ImagePreview = () => {
 
       {/* Canvas Container with Loading Overlay */}
       <div className="relative">
-        <div className="canvas-container overflow-hidden max-h-[80vh] rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 flex items-center justify-center min-h-[300px] sm:min-h-[400px] w-full">
+        <div className="canvas-container overflow-hidden max-h-[80vh] rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 flex items-center justify-center w-full">
           <canvas
             ref={canvasRef}
             style={{

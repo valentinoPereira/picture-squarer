@@ -370,7 +370,7 @@ input:checked + .toggle-slider:before {
 
     .canvas-container {
         max-height: 50vh;
-        min-height: 250px;
+        aspect-ratio: 1;
     }
 
     .upload-zone {
@@ -389,10 +389,6 @@ input:checked + .toggle-slider:before {
         right: 1.5rem;
     }
 
-    /* Ensure preview fills available space on mobile */
-    .canvas-container {
-        margin-bottom: 6rem; /* Space for floating button */
-    }
 }
 
 /* Print styles */
