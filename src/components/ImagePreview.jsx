@@ -85,14 +85,17 @@ const ImagePreview = () => {
     // Create image from the data URL to draw it
     const img = new Image();
     img.onload = () => {
-      // Only set canvas dimensions and clear right before drawing
-      // This prevents blank canvas from being visible
-      canvasRef.current.width = containerWidth;
-      canvasRef.current.height = containerHeight;
+      // Account for device pixel ratio for sharp rendering
+      const dpr = window.devicePixelRatio || 1;
+      const scaledWidth = containerWidth * dpr;
+      const scaledHeight = containerHeight * dpr;
 
-      // Enable high-quality image rendering
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = "high";
+      // Set canvas resolution for high-DPI displays
+      canvasRef.current.width = scaledWidth;
+      canvasRef.current.height = scaledHeight;
+
+      // Scale context to match CSS size
+      ctx.scale(dpr, dpr);
 
       ctx.clearRect(0, 0, containerWidth, containerHeight);
       ctx.drawImage(
