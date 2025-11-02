@@ -35,7 +35,7 @@ const SettingsPanel = () => {
   if (!originalImage) {
     return (
       <div className="card text-center py-12">
-        <p className="text-gray-500">Upload an image to adjust settings</p>
+        <p className="text-gray-500 dark:text-gray-400">Upload an image to adjust settings</p>
       </div>
     );
   }
@@ -60,16 +60,16 @@ const SettingsPanel = () => {
     <div className="space-y-6">
       {/* Blur Intensity */}
       <div className="card">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
           Blur Settings
         </h3>
 
         <div className="space-y-4">
           {/* Toggle Blurred Background */}
-          <div className="flex items-center justify-between gap-3 p-3 bg-gray-50 rounded-lg">
+          <div className="flex items-center justify-between gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
             <div className="flex-1 min-w-0">
-              <p className="font-medium text-gray-900 text-sm sm:text-base">Blurred Background</p>
-              <p className="text-xs sm:text-sm text-gray-600">
+              <p className="font-medium text-gray-900 dark:text-gray-100 text-sm sm:text-base">Blurred Background</p>
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                 {processingOptions.useBlurredBackground
                   ? "Using blurred image as padding"
                   : "Using solid color for padding"}
@@ -80,7 +80,7 @@ const SettingsPanel = () => {
               className={`relative inline-flex h-7 w-12 flex-shrink-0 rounded-full transition-colors ${
                 processingOptions.useBlurredBackground
                   ? "bg-blue-600"
-                  : "bg-gray-300"
+                  : "bg-gray-300 dark:bg-gray-600"
               }`}
               role="switch"
               aria-checked={processingOptions.useBlurredBackground}
@@ -99,11 +99,11 @@ const SettingsPanel = () => {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="blur-slider"
-                  className="font-medium text-gray-900"
+                  className="font-medium text-gray-900 dark:text-gray-100"
                 >
                   Blur Intensity
                 </label>
-                <span className="text-lg font-semibold text-blue-600">
+                <span className="text-lg font-semibold text-blue-600 dark:text-blue-400">
                   {localBlurIntensity}px
                 </span>
               </div>
@@ -114,9 +114,9 @@ const SettingsPanel = () => {
                 max="50"
                 value={localBlurIntensity}
                 onChange={handleBlurChange}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                className="w-full h-2 bg-gray-200 dark:bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-600"
               />
-              <div className="flex justify-between text-xs text-gray-500">
+              <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400">
                 <span>No blur</span>
                 <span>Heavy blur</span>
               </div>
@@ -126,7 +126,7 @@ const SettingsPanel = () => {
           {/* Blur Presets */}
           {processingOptions.useBlurredBackground && (
             <div className="pt-2">
-              <p className="text-sm font-medium text-gray-700 mb-2">
+              <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Quick Presets
               </p>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -140,7 +140,7 @@ const SettingsPanel = () => {
                     className={`py-2 px-3 rounded-lg text-sm font-medium transition-all ${
                       localBlurIntensity === preset
                         ? "bg-blue-600 text-white"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                        : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
                     }`}
                   >
                     {preset === 0 ? "None" : `${preset}px`}
@@ -154,7 +154,7 @@ const SettingsPanel = () => {
 
       {/* Color Settings */}
       <div className="card">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
           Padding Color
         </h3>
 
@@ -166,12 +166,12 @@ const SettingsPanel = () => {
                   type="color"
                   value={processingOptions.paddingColor || "#ffffff"}
                   onChange={handleColorChange}
-                  className="w-16 h-16 rounded-lg cursor-pointer border-2 border-gray-300"
+                  className="w-16 h-16 rounded-lg cursor-pointer border-2 border-gray-300 dark:border-gray-600"
                 />
               </div>
               <div>
-                <p className="font-medium text-gray-900">Select Color</p>
-                <p className="text-sm text-gray-600">
+                <p className="font-medium text-gray-900 dark:text-gray-100">Select Color</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
                   {processingOptions.paddingColor || "Auto (dominant color)"}
                 </p>
               </div>
@@ -179,7 +179,7 @@ const SettingsPanel = () => {
 
             {/* Color Presets */}
             <div>
-              <p className="text-sm font-medium text-gray-700 mb-2">
+              <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Popular Colors
               </p>
               <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
@@ -196,8 +196,8 @@ const SettingsPanel = () => {
                     onClick={() => setPaddingColor(color)}
                     className={`w-full aspect-square rounded-lg border-2 transition-all ${
                       processingOptions.paddingColor === color
-                        ? "border-gray-900"
-                        : "border-gray-300"
+                        ? "border-gray-900 dark:border-gray-100"
+                        : "border-gray-300 dark:border-gray-600"
                     }`}
                     style={{ backgroundColor: color }}
                     title={color}
@@ -209,7 +209,7 @@ const SettingsPanel = () => {
         )}
 
         {processingOptions.useBlurredBackground && (
-          <p className="text-sm text-gray-600 bg-blue-50 p-3 rounded-lg">
+          <p className="text-sm text-gray-600 dark:text-gray-400 bg-blue-50 dark:bg-blue-900 p-3 rounded-lg">
             Color is automatically determined from the image when using blurred
             background.
           </p>
@@ -217,8 +217,8 @@ const SettingsPanel = () => {
       </div>
 
       {/* Reset Button */}
-      <div className="card bg-gray-50 border border-gray-200">
-        <p className="text-sm text-gray-700 mb-3">
+      <div className="card bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+        <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
           Restore all settings to defaults
         </p>
         <button onClick={handleResetSettings} className="btn-secondary w-full">
@@ -227,9 +227,9 @@ const SettingsPanel = () => {
       </div>
 
       {/* Info Panel */}
-      <div className="card bg-blue-50 border border-blue-200">
-        <h4 className="font-semibold text-blue-900 mb-2">💡 Tips</h4>
-        <ul className="text-sm text-blue-800 space-y-1">
+      <div className="card bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-800">
+        <h4 className="font-semibold text-blue-900 dark:text-blue-200 mb-2">💡 Tips</h4>
+        <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1">
           <li>• Blur makes the padding less distracting</li>
           <li>• Higher blur values = more processing time</li>
           <li>• Use solid colors for sharp, clean edges</li>

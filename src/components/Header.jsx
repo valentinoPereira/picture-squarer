@@ -19,7 +19,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+    <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50 shadow-sm">
       <div className="max-w-6xl mx-auto px-4 py-3 sm:py-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo and Title */}
@@ -40,10 +40,10 @@ const Header = () => {
               </svg>
             </div>
             <div>
-              <h1 className="text-lg sm:text-xl font-bold text-gray-900">
+              <h1 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100">
                 Picture Squarer
               </h1>
-              <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 hidden sm:block">
                 Perfect square images for social media
               </p>
             </div>
@@ -53,7 +53,7 @@ const Header = () => {
           {originalImage && (
             <button
               onClick={handleReset}
-              className="flex items-center gap-1.5 px-3 py-2 sm:py-1.5 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-md transition-colors duration-200 min-h-[44px] sm:min-h-0"
+              className="flex items-center gap-1.5 px-3 py-2 sm:py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 active:bg-gray-300 dark:active:bg-gray-500 rounded-md transition-colors duration-200 min-h-[44px] sm:min-h-0"
               title="Clear image and reset settings"
             >
               <svg

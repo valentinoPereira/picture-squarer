@@ -105,7 +105,7 @@ const ImagePreview = () => {
   if (!originalImage) {
     return (
       <div className="card text-center py-12">
-        <p className="text-gray-500">Upload an image to see preview</p>
+        <p className="text-gray-500 dark:text-gray-400">Upload an image to see preview</p>
       </div>
     );
   }
@@ -113,15 +113,15 @@ const ImagePreview = () => {
   return (
     <div className="card space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-gray-900">Preview</h3>
-        <span className="text-sm text-gray-600">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Preview</h3>
+        <span className="text-sm text-gray-600 dark:text-gray-400">
           {originalImage.width} × {originalImage.height}
         </span>
       </div>
 
       {/* Canvas Container with Loading Overlay */}
       <div className="relative">
-        <div className="canvas-container overflow-hidden max-h-[80vh] rounded-lg border border-gray-200 bg-gray-50 flex items-center justify-center min-h-[300px] sm:min-h-[400px] w-full">
+        <div className="canvas-container overflow-hidden max-h-[80vh] rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 flex items-center justify-center min-h-[300px] sm:min-h-[400px] w-full">
           <canvas
             ref={canvasRef}
             style={{
@@ -130,17 +130,17 @@ const ImagePreview = () => {
               width: "auto",
               height: "auto",
               display: "block",
-              backgroundColor: "#f3f4f6",
+              backgroundColor: "var(--canvas-bg-color, #f3f4f6)",
             }}
           />
         </div>
 
         {/* Loading Indicator Overlay */}
         {isRendering && (
-          <div className="absolute top-3 right-3 bg-white rounded-full shadow-lg p-3 flex items-center gap-2">
+          <div className="absolute top-3 right-3 bg-white dark:bg-gray-800 rounded-full shadow-lg p-3 flex items-center gap-2">
             <div className="animate-spin-custom">
               <svg
-                className="w-5 h-5 text-blue-600"
+                className="w-5 h-5 text-blue-600 dark:text-blue-400"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -153,7 +153,7 @@ const ImagePreview = () => {
                 />
               </svg>
             </div>
-            <span className="text-sm font-medium text-gray-700">
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
               Processing...
             </span>
           </div>
@@ -162,15 +162,15 @@ const ImagePreview = () => {
 
       {/* Image Info */}
       <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-sm">
-        <div className="bg-gray-50 p-3 rounded">
-          <p className="text-gray-600">Original Size</p>
-          <p className="font-semibold text-gray-900">
+        <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded">
+          <p className="text-gray-600 dark:text-gray-400">Original Size</p>
+          <p className="font-semibold text-gray-900 dark:text-gray-100">
             {originalImage.width} × {originalImage.height}
           </p>
         </div>
-        <div className="bg-gray-50 p-3 rounded">
-          <p className="text-gray-600">Output Size</p>
-          <p className="font-semibold text-gray-900">
+        <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded">
+          <p className="text-gray-600 dark:text-gray-400">Output Size</p>
+          <p className="font-semibold text-gray-900 dark:text-gray-100">
             {Math.max(originalImage.width, originalImage.height)} ×{" "}
             {Math.max(originalImage.width, originalImage.height)}
           </p>
@@ -178,15 +178,15 @@ const ImagePreview = () => {
       </div>
 
       {/* Mobile Single Line Info */}
-      <div className="sm:hidden text-sm bg-gray-50 p-3 rounded">
-        <p className="text-gray-600 text-center">
+      <div className="sm:hidden text-sm bg-gray-50 dark:bg-gray-800 p-3 rounded">
+        <p className="text-gray-600 dark:text-gray-400 text-center">
           <span className="font-semibold">Original:</span>{" "}
-          <span className="font-semibold text-gray-900">
+          <span className="font-semibold text-gray-900 dark:text-gray-100">
             {originalImage.width} × {originalImage.height}
           </span>
           {" | "}
           <span className="font-semibold">Output:</span>{" "}
-          <span className="font-semibold text-gray-900">
+          <span className="font-semibold text-gray-900 dark:text-gray-100">
             {Math.max(originalImage.width, originalImage.height)} ×{" "}
             {Math.max(originalImage.width, originalImage.height)}
           </span>
@@ -194,8 +194,8 @@ const ImagePreview = () => {
       </div>
 
       {/* Current Settings Display */}
-      <div className="bg-blue-50 border border-blue-200 rounded p-3">
-        <p className="text-sm text-blue-900">
+      <div className="bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-800 rounded p-3">
+        <p className="text-sm text-blue-900 dark:text-blue-200">
           <span className="font-semibold">Blur Intensity:</span>{" "}
           {processingOptions.blurIntensity}px
         </p>

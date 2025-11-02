@@ -27,10 +27,31 @@
     background: #94a3b8;
 }
 
+/* Dark mode scrollbar */
+@media (prefers-color-scheme: dark) {
+    .canvas-container::-webkit-scrollbar-track {
+        background: #1f2937;
+    }
+
+    .canvas-container::-webkit-scrollbar-thumb {
+        background: #4b5563;
+    }
+
+    .canvas-container::-webkit-scrollbar-thumb:hover {
+        background: #6b7280;
+    }
+}
+
 /* Firefox scrollbar */
 .canvas-container {
     scrollbar-color: #cbd5e1 #f1f5f9;
     scrollbar-width: thin;
+}
+
+@media (prefers-color-scheme: dark) {
+    .canvas-container {
+        scrollbar-color: #4b5563 #1f2937;
+    }
 }
 
 /* Canvas container styles */
@@ -178,6 +199,16 @@
 .card:hover {
     transform: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+@media (prefers-color-scheme: dark) {
+    .card {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .card:hover {
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
 }
 
 /* Input focus styles */
@@ -383,21 +414,41 @@ html {
     }
 }
 
-/* Dark mode support (optional) */
+/* Dark mode support */
 @media (prefers-color-scheme: dark) {
-    .card {
+    :root {
+        --canvas-bg-color: #1f2937;
+    }
+
+    .canvas-container {
         background-color: #1f2937;
-        color: #f3f4f6;
     }
 
     .upload-zone {
-        background-color: #111827;
-        border-color: #374151;
+        background-color: #1f2937;
+        border-color: #4b5563;
+    }
+
+    .upload-zone::before {
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.1),
+            transparent
+        );
     }
 
     .input-field {
-        background-color: #111827;
-        border-color: #374151;
+        background-color: #374151;
+        border-color: #4b5563;
         color: #f3f4f6;
+    }
+
+    .input-field:focus {
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+
+    input[type="color"] {
+        border-color: #4b5563;
     }
 }

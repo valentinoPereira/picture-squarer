@@ -16,7 +16,7 @@ const DownloadButton = () => {
   if (!originalImage || !processedCanvas) {
     return (
       <div className="card text-center py-8">
-        <p className="text-gray-500">Process an image to enable download</p>
+        <p className="text-gray-500 dark:text-gray-400">Process an image to enable download</p>
       </div>
     );
   }
@@ -65,11 +65,11 @@ const DownloadButton = () => {
 
   return (
     <div className="card space-y-4">
-      <h3 className="text-lg font-semibold text-gray-900">Ready to Download</h3>
+      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Ready to Download</h3>
 
       {/* Image Size Info */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4">
-        <p className="text-xs sm:text-sm text-blue-900">
+      <div className="bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-800 rounded-lg p-3 sm:p-4">
+        <p className="text-xs sm:text-sm text-blue-900 dark:text-blue-200">
           <span className="font-semibold">Output Dimensions:</span>
           <br />
           {outputDimension} × {outputDimension} pixels
@@ -78,7 +78,7 @@ const DownloadButton = () => {
 
       {/* Format Selection */}
       <div className="space-y-3">
-        <label className="block text-sm font-medium text-gray-900">
+        <label className="block text-sm font-medium text-gray-900 dark:text-gray-100">
           File Format
         </label>
         <div className="grid grid-cols-3 gap-2 sm:gap-3">
@@ -88,8 +88,8 @@ const DownloadButton = () => {
               onClick={() => setSelectedFormat(format.id)}
               className={`p-2 sm:p-3 rounded-lg border-2 transition-all duration-200 ${
                 selectedFormat === format.id
-                  ? "border-blue-600 bg-blue-50 text-blue-900"
-                  : "border-gray-300 bg-white text-gray-700 hover:border-blue-400"
+                  ? "border-blue-600 bg-blue-50 dark:bg-blue-900 text-blue-900 dark:text-blue-200"
+                  : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:border-blue-400 dark:hover:border-blue-500"
               }`}
             >
               <div className="font-semibold text-xs sm:text-sm">{format.label}</div>
@@ -105,11 +105,11 @@ const DownloadButton = () => {
           <div className="flex items-center justify-between">
             <label
               htmlFor="quality-slider"
-              className="text-sm font-medium text-gray-900"
+              className="text-sm font-medium text-gray-900 dark:text-gray-100"
             >
               Quality / Compression
             </label>
-            <span className="text-sm font-semibold text-blue-600">
+            <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">
               {quality}%
             </span>
           </div>
@@ -120,10 +120,10 @@ const DownloadButton = () => {
             max="100"
             value={quality}
             onChange={(e) => setQuality(parseInt(e.target.value, 10))}
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+            className="w-full h-2 bg-gray-200 dark:bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-600"
             disabled={isDownloading}
           />
-          <div className="flex justify-between text-xs text-gray-500">
+          <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400">
             <span>Smaller file</span>
             <span>Better quality</span>
           </div>
@@ -131,8 +131,8 @@ const DownloadButton = () => {
       )}
 
       {/* Format Description */}
-      <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-        <p className="text-xs text-gray-700">
+      <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
+        <p className="text-xs text-gray-700 dark:text-gray-300">
           {formats.find((f) => f.id === selectedFormat)?.info}
         </p>
       </div>
@@ -181,11 +181,11 @@ const DownloadButton = () => {
       </button>
 
       {/* Tips Section */}
-      <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-        <h4 className="text-xs font-semibold text-amber-900 mb-2">
+      <div className="bg-amber-50 dark:bg-amber-900 border border-amber-200 dark:border-amber-800 rounded-lg p-3">
+        <h4 className="text-xs font-semibold text-amber-900 dark:text-amber-200 mb-2">
           💡 Pro Tips
         </h4>
-        <ul className="text-xs text-amber-800 space-y-1">
+        <ul className="text-xs text-amber-800 dark:text-amber-200 space-y-1">
           <li>• PNG is best for preserving quality without compression</li>
           <li>
             • Use JPG or WebP for smaller file sizes perfect for social media

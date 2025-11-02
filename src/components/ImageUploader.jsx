@@ -160,7 +160,7 @@ const ImageUploader = () => {
           {/* Upload Icon */}
           <div className="flex justify-center">
             <svg
-              className="w-12 h-12 sm:w-16 sm:h-16 text-gray-400 group-hover:text-blue-500 transition-colors"
+              className="w-12 h-12 sm:w-16 sm:h-16 text-gray-400 dark:text-gray-500 group-hover:text-blue-500 transition-colors"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -177,14 +177,14 @@ const ImageUploader = () => {
 
           {/* Text Content */}
           <div>
-            <p className="text-base sm:text-lg font-semibold text-gray-700">
+            <p className="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-300">
               Drop your image here
             </p>
-            <p className="text-sm text-gray-500 mt-1">or tap to browse</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">or tap to browse</p>
           </div>
 
           {/* Supported Formats */}
-          <div className="text-xs sm:text-sm text-gray-500">
+          <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
             <p>Supported: JPEG, PNG, WebP, GIF</p>
             <p>Maximum size: 50MB</p>
           </div>
@@ -193,8 +193,8 @@ const ImageUploader = () => {
 
       {/* Show selected file info if image is loaded */}
       {originalImage && (
-        <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
-          <p className="text-sm text-blue-800">
+        <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900 rounded-lg border border-blue-200 dark:border-blue-800">
+          <p className="text-sm text-blue-800 dark:text-blue-200">
             <span className="font-semibold">
               {originalImage.width} × {originalImage.height}
             </span>
