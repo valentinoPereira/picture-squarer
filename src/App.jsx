@@ -171,7 +171,7 @@ function AppContent() {
           <div className="text-center text-gray-600 dark:text-gray-400 text-xs sm:text-sm">
             <p>Made with ❤️ for Perfect Social Media Profile Pictures</p>
             <p className="mt-2 text-gray-500 dark:text-gray-500">
-              © 2024 Picture Squarer by Valentino Pereira. All rights reserved.
+              © 2025 Picture Squarer by Valentino Pereira. All rights reserved.
             </p>
           </div>
         </div>
