@@ -337,6 +337,85 @@ export const processImageToSquareWithWorker = async (file, options = {}) => {
 };
 
 /**
+ * Export blob to file with optional format conversion
+ * @param {Blob} blob - Original blob (PNG from worker)
+ * @param {string} filename - Output filename
+ * @param {string} format - Desired file format ('png', 'jpg', 'webp')
+ * @param {number} quality - JPEG/WebP quality (0-1, default: 0.95)
+ * @returns {Promise<void>}
+ */
+export const downloadBlob = (blob, filename, format = "png", quality = 0.95) => {
+  return new Promise((resolve, reject) => {
+    // If format is PNG, download the blob directly
+    if (format.toLowerCase() === "png") {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => {
+        URL.revokeObjectURL(url);
+        resolve();
+      }, 100);
+      return;
+    }
+
+    // For JPG/WebP, convert from PNG blob to requested format
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+
+        // Now use toBlob with the desired format and quality
+        const mimeType =
+          {
+            jpg: "image/jpeg",
+            jpeg: "image/jpeg",
+            webp: "image/webp",
+          }[format.toLowerCase()] || "image/jpeg";
+
+        canvas.toBlob(
+          (outputBlob) => {
+            try {
+              if (!outputBlob) {
+                reject(new Error("Failed to generate image blob"));
+                return;
+              }
+              const url = URL.createObjectURL(outputBlob);
+              const link = document.createElement("a");
+              link.href = url;
+              link.download = filename;
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+              setTimeout(() => {
+                URL.revokeObjectURL(url);
+                resolve();
+              }, 100);
+            } catch (error) {
+              reject(error);
+            }
+          },
+          mimeType,
+          quality,
+        );
+      };
+      img.onerror = () => reject(new Error("Failed to load image"));
+      img.src = reader.result;
+    };
+    reader.onerror = () => reject(new Error("Failed to read blob"));
+    reader.readAsDataURL(blob);
+  });
+};
+
+/**
  * Export canvas to file with specified format
 </parameter>
  * @param {HTMLCanvasElement} canvas - Canvas element
@@ -350,26 +429,44 @@ export const downloadCanvas = (
   format = "png",
   quality = 0.95,
 ) => {
-  const mimeType =
-    {
-      png: "image/png",
-      jpg: "image/jpeg",
-      jpeg: "image/jpeg",
-      webp: "image/webp",
-    }[format.toLowerCase()] || "image/png";
+  return new Promise((resolve, reject) => {
+    const mimeType =
+      {
+        png: "image/png",
+        jpg: "image/jpeg",
+        jpeg: "image/jpeg",
+        webp: "image/webp",
+      }[format.toLowerCase()] || "image/png";
 
-  const link = document.createElement("a");
+    const link = document.createElement("a");
 
-  if (format.toLowerCase() === "png") {
-    link.href = canvas.toDataURL(mimeType);
-  } else {
-    link.href = canvas.toDataURL(mimeType, quality);
-  }
-
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+    // Use toBlob for better quality control (toDataURL doesn't properly respect quality in many browsers)
+    canvas.toBlob(
+      (blob) => {
+        try {
+          if (!blob) {
+            reject(new Error("Failed to generate image blob"));
+            return;
+          }
+          const url = URL.createObjectURL(blob);
+          link.href = url;
+          link.download = filename;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          // Clean up the object URL after a delay to ensure download starts
+          setTimeout(() => {
+            URL.revokeObjectURL(url);
+            resolve();
+          }, 100);
+        } catch (error) {
+          reject(error);
+        }
+      },
+      mimeType,
+      format.toLowerCase() !== "png" ? quality : undefined,
+    );
+  });
 };
 
 /**

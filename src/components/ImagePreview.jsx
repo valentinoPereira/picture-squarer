@@ -39,7 +39,7 @@ const ImagePreview = () => {
 
         // Store the processed canvas data for the drawing effect
         setProcessedCanvasData(result);
-        setProcessedImage(result.canvas, result.url);
+        setProcessedImage(result, result.url);
       } catch (err) {
         console.error("[ImagePreview] Processing error:", err);
         setErrorMessage(`Processing error: ${err.message}`);
@@ -74,13 +74,13 @@ const ImagePreview = () => {
 
     // Calculate scaling to fit the entire image
     const scale = Math.min(
-      containerWidth / processedCanvasData.canvas.width,
-      containerHeight / processedCanvasData.canvas.height,
+      containerWidth / processedCanvasData.dimensions.square.width,
+      containerHeight / processedCanvasData.dimensions.square.height,
     );
 
     // Calculate position to center the image
-    const x = (containerWidth - processedCanvasData.canvas.width * scale) / 2;
-    const y = (containerHeight - processedCanvasData.canvas.height * scale) / 2;
+    const x = (containerWidth - processedCanvasData.dimensions.square.width * scale) / 2;
+    const y = (containerHeight - processedCanvasData.dimensions.square.height * scale) / 2;
 
     // Create image from the data URL to draw it
     const img = new Image();
@@ -102,8 +102,8 @@ const ImagePreview = () => {
         img,
         x,
         y,
-        processedCanvasData.canvas.width * scale,
-        processedCanvasData.canvas.height * scale,
+        processedCanvasData.dimensions.square.width * scale,
+        processedCanvasData.dimensions.square.height * scale,
       );
     };
     img.src = processedCanvasData.url;

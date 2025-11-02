@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useImage } from '../context/ImageContext';
-import { downloadCanvas, generateOutputFilename } from '../utils/imageProcessor';
+import { downloadCanvas, downloadBlob, generateOutputFilename } from '../utils/imageProcessor';
 
 /**
  * DownloadButton Component
@@ -28,7 +28,13 @@ const DownloadButton = () => {
         originalFile.name,
         selectedFormat,
       );
-      downloadCanvas(processedCanvas, filename, selectedFormat, quality / 100);
+      // If processedCanvas has a blob (from worker), use that directly
+      if (processedCanvas.blob) {
+        await downloadBlob(processedCanvas.blob, filename, selectedFormat, quality / 100);
+      } else {
+        // Fallback for non-worker canvas
+        await downloadCanvas(processedCanvas, filename, selectedFormat, quality / 100);
+      }
     } catch (error) {
       console.error("Download error:", error);
       alert("Failed to download image. Please try again.");
