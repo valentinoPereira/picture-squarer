@@ -90,6 +90,10 @@ const ImagePreview = () => {
       canvasRef.current.width = containerWidth;
       canvasRef.current.height = containerHeight;
 
+      // Enable high-quality image rendering
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+
       ctx.clearRect(0, 0, containerWidth, containerHeight);
       ctx.drawImage(
         img,
@@ -105,7 +109,9 @@ const ImagePreview = () => {
   if (!originalImage) {
     return (
       <div className="card text-center py-12">
-        <p className="text-gray-500 dark:text-gray-400">Upload an image to see preview</p>
+        <p className="text-gray-500 dark:text-gray-400">
+          Upload an image to see preview
+        </p>
       </div>
     );
   }
@@ -113,24 +119,27 @@ const ImagePreview = () => {
   return (
     <div className="card space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Preview</h3>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+          Preview
+        </h3>
         <span className="text-sm text-gray-600 dark:text-gray-400">
           {originalImage.width} × {originalImage.height}
         </span>
       </div>
 
       {/* Canvas Container with Loading Overlay */}
-      <div className="relative">
+      <div className="relative sm:mb-0">
         <div className="canvas-container overflow-hidden max-h-[80vh] rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 flex items-center justify-center w-full">
           <canvas
             ref={canvasRef}
             style={{
               maxWidth: "100%",
               maxHeight: "100%",
-              width: "auto",
-              height: "auto",
+              width: "100%",
+              height: "100%",
               display: "block",
               backgroundColor: "var(--canvas-bg-color, #f3f4f6)",
+              objectFit: "contain",
             }}
           />
         </div>
