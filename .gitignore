@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# AI agent local config
+.claude/
